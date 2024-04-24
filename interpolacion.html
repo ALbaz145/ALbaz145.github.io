@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interpolación</title>
+    <link rel="stylesheet" type="text/css" href="interpolacion.css">
+</head>
+<body>
+    <p id="output"></p>
+
+    <script>
+        function InterpolarTemperatura(hora_deseada, horas, temperaturas) {
+            let hora_anterior = 0, hora_posterior = 0;
+            let temperatura_anterior = 0, temperatura_posterior = 0;
+
+            for (let i = 0; i < horas.length; i++) {
+                if (horas[i] <= hora_deseada) {
+                    hora_anterior = horas[i];
+                    temperatura_anterior = temperaturas[i];
+                } else {
+                    hora_posterior = horas[i];
+                    temperatura_posterior = temperaturas[i];
+                    break;
+                }
+            }
+
+            if (hora_posterior === 0) {
+                hora_posterior = horas[0];
+                temperatura_posterior = temperaturas[0];
+            }
+
+            let temperatura_interpolada = temperatura_anterior +
+                (temperatura_posterior - temperatura_anterior) *
+                ((hora_deseada - hora_anterior) / (hora_posterior - hora_anterior));
+
+            return temperatura_interpolada.toFixed(2);
+        }
+
+        function main() {
+            const output = document.getElementById("output");
+            output.innerHTML = "";
+
+            const horas = [7, 10, 13, 16, 19];
+            const temperaturas = [14, 21, 28, 30, 28];
+            const horas_deseadas = [9, 12, 14, 18];
+            // Create a table
+    let table = document.createElement('table');
+
+// Create a header row
+let headerRow = document.createElement('tr');
+
+// Define your headers
+let headers = ['Horas', 'Temperaturas'];
+
+// For each header
+for (let i = 0; i < headers.length; i++) {
+    // Create a header cell
+    let headerCell = document.createElement('th');
+
+    // Set the content of the header cell
+    headerCell.textContent = headers[i];
+
+    // Add the header cell to the header row
+    headerRow.appendChild(headerCell);
+}
+
+// Add the header row to the table
+table.appendChild(headerRow);
+
+// For each row of data
+for (let i = 0; i < horas.length; i++) {
+    // Create a new row
+    let row = document.createElement('tr');
+
+    // Create a cell for the hour and add it to the row
+    let hourCell = document.createElement('td');
+    hourCell.textContent = horas[i];
+    row.appendChild(hourCell);
+
+    // Create a cell for the temperature and add it to the row
+    let temperatureCell = document.createElement('td');
+    temperatureCell.textContent = temperaturas[i];
+    row.appendChild(temperatureCell);
+
+    // Add the row to the table
+    table.appendChild(row);
+}
+
+// Add the table to the output
+output.appendChild(table);
+
+            output.innerHTML += "<br>Valores calculados:<br>";
+            horas_deseadas.forEach(hora_deseada => {
+                const temperatura_interpolada = InterpolarTemperatura(hora_deseada, horas, temperaturas);
+                output.innerHTML += `Temperatura a las ${hora_deseada}:00: ${temperatura_interpolada}°C<br>`;
+            });
+        }
+        main();
+    </script>
+</body>
+</html>

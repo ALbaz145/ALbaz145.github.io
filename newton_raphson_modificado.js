@@ -49,6 +49,7 @@ function newtonRaphson() {
 
         for (let j = 0; j < resultados[i].length; j++) {
             let cell = document.createElement('td');
+
             cell.textContent = resultados[i][j];
             row.appendChild(cell);
         }
