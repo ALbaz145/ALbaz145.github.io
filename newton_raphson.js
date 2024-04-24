@@ -3,15 +3,13 @@ function displayFunction() {
     let display = document.getElementById('display');
 
     let primeraDerivada = math.derivative(input, 'x').toString();
-    let segundaDerivada = math.derivative(primeraDerivada, 'x').toString();
 
     // Formato de la function en un string LaTeX
     let latexFunction = '\\(' + input.replace(/\*/g, '\\cdot') + '\\)';
     let latexprimeraDerivada = '\\(' + primeraDerivada.replace(/\*/g, '\\cdot') + '\\)';
-    let latexsegundaDerivada = '\\(' + segundaDerivada.replace(/\*/g, '\\cdot') + '\\)';
 
     // String LaTeX  para mostrar en el display
-    display.innerHTML = 'Funcion: ' + latexFunction + '<br>Primera Derivada: ' + latexprimeraDerivada + '<br>Segunda Derivada: ' + latexsegundaDerivada;
+    display.innerHTML = 'Funcion: ' + latexFunction + '<br>Primera Derivada: ' + latexprimeraDerivada
 
     // convierte LaTeX en MathJax
     MathJax.typeset();
@@ -25,12 +23,10 @@ function newtonRaphson() {
     for (let i = 0; i < iteraciones; i++) {
         let funcionEvaluada = math.parse(input).evaluate({x: valorInicial});
         let primeraDerivadaFunc = math.derivative(input, 'x');
-        let segundaDerivadaFunc = math.derivative(primeraDerivadaFunc, 'x');
     
         let primeraDerivada = primeraDerivadaFunc.evaluate({x: valorInicial});
-        let segundaDerivada = segundaDerivadaFunc.evaluate({x: valorInicial});
 
-        let newtonRaphson = valorInicial - ((funcionEvaluada * primeraDerivada) / (Math.pow(primeraDerivada, 2) - (funcionEvaluada * segundaDerivada)));
+        let newtonRaphson = valorInicial - (funcionEvaluada / primeraDerivada);
         error = (Math.abs(newtonRaphson - valorInicial))/(newtonRaphson) * 100;
         resultados.push([i+1, newtonRaphson, error]);
         valorInicial = newtonRaphson;

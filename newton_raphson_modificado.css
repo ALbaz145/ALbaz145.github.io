@@ -1,0 +1,28 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100vh;
+}
+#tableContainer table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#tableContainer th, #tableContainer td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#tableContainer tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+#tableContainer th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4CAF50;
+    color: white;
+}
