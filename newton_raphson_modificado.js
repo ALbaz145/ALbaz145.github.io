@@ -17,6 +17,7 @@ function displayFunction() {
     MathJax.typeset();
 }
 function newtonRaphson() {
+    document.getElementById('tableContainer').innerHTML = '';
     let input = document.getElementById('myInput').value;
     let valorInicial = parseFloat(document.getElementById('valorInicial').value);
     let resultados = [];
@@ -34,7 +35,9 @@ function newtonRaphson() {
         error = (Math.abs(newtonRaphson - valorInicial))/(newtonRaphson) * 100;
         resultados.push([i+1, newtonRaphson, error]);
         valorInicial = newtonRaphson;
-    
+        if (error == 0) {
+            break;
+        }
     }
     //console.log('funvion evaluada:' + funcionEvaluada);
     //console.log('First Derivative: ' + primeraDerivada);
